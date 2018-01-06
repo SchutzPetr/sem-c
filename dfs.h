@@ -5,32 +5,59 @@
 #ifndef SEM_DFS_H
 #define SEM_DFS_H
 
+#include "date.h"
+
 struct Vertex {
     int id;
-    struct Node* linkedList;
+    int mark;
+    struct Node* list;
+    struct Vertex* next;
 };
+
 struct Node {
+    Date* value;
     struct Vertex* vertex;
-    struct Node* nextNode;
+    struct Node* next;
+};
+
+struct ResultNode{
+    int mark;
+    struct Node* data;
+    struct ResultVertex* resultVertex;
+    struct ResultNode* next;
+};
+
+struct ResultVertex{
+    int listSize;
+    struct Vertex* vertex;
+    struct ResultNode* list;
+};
+
+struct ResultNodeList{
+    struct ResultNode* data;
+    struct ResultNodeList* next;
 };
 
 typedef struct Vertex Vertex;
 typedef struct Node Node;
+typedef struct ResultNode ResultNode;
+typedef struct ResultNodeList ResultNodeList;
+typedef struct ResultVertex ResultVertex;
 
-/**
- * Creates a new vertex
- *
- * @param id
- * @return pointer to new vertex
- */
-Vertex* create_vertex(int id);
+Vertex* new_vertex(int id);
 
-/**
- * Connect vertex a and b as linked list
- *
- * @param a vertex a
- * @param b vertex b
- */
-void connect(Vertex* a, Vertex* b);
+ResultVertex* new_result_vertex(Vertex* vertex);
+
+ResultNode* new_result_node(ResultVertex* a, ResultVertex* b, Node* node);
+
+ResultNodeList* new_result_node_list(ResultNode* node);
+
+void connect(Vertex* a, Vertex* b, Date *value);
+
+ResultVertex* do_dfs(Vertex *vertex, int* count, Vertex *dest);
+
+ResultVertex* dfs(Vertex *graph[], int size, Vertex *start, Vertex *dest);
+
+ResultVertex* dfs_rec(Vertex *vertex, int* count, Vertex *dest);
 
 #endif //SEM_DFS_H
