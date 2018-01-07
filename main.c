@@ -68,12 +68,15 @@ void print_result(ResultVertex *resultVertex) {
                 printf("%d", dif);
             }
             printf("\n");
+            free(dates);
         }
 
         ResultNode* prev = node;
         node = node->next;
         free(prev);
     }
+    free(node);
+    free(resultVertex);
 }
 
 int main(int argc, char *argv[]) {
