@@ -109,3 +109,7 @@ ResultVertex* dfs(Vertex *graph[], int size, Vertex *start, Vertex *dest) {
     ResultVertex* resultVertex = do_dfs(start, &count, dest);
     return resultVertex;
 }
+
+void dfs_free(Vertex *graph[]){
+
+}

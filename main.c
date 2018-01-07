@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <io.h>
+#include <unistd.h>
 #include "vector.h"
 #include "record.h"
 #include "dfs.h"
@@ -70,7 +70,9 @@ void print_result(ResultVertex *resultVertex) {
             printf("\n");
         }
 
+        ResultNode* prev = node;
         node = node->next;
+        free(prev);
     }
 }
 
@@ -154,7 +156,9 @@ int main(int argc, char *argv[]) {
     Record *rec = head;
     while (rec) {
         connect(binary_search(vertex_size, graph, rec->id1), binary_search(vertex_size, graph, rec->id2), rec->data);
+        Record* prev = rec;
         rec = rec->next;
+        free(prev);
     }
 
     ResultVertex *resultVertex = dfs(graph, vertex_size, binary_search(vertex_size, graph, id1),
