@@ -67,16 +67,13 @@ void print_result(ResultVertex *resultVertex) {
                 int dif = getDifference(dates[0], dates[countOfNodes - 1]);
                 printf("%d", dif);
             }
+
             printf("\n");
-            free(dates);
         }
 
         ResultNode* prev = node;
         node = node->next;
-        free(prev);
     }
-    free(node);
-    free(resultVertex);
 }
 
 int main(int argc, char *argv[]) {
@@ -174,6 +171,21 @@ int main(int argc, char *argv[]) {
 
     ResultVertex *resultVertex = dfs(graph, vertex_size, max_length, binary_search(vertex_size, graph, id1),
                                      binary_search(vertex_size, graph, id2));
+
     print_result(resultVertex);
+
+    for (i = 0; i < copy_vector.size; i++) {
+        Node *node = graph[i]->list;
+        while (node) {
+            Node* prev = node;
+            node = node->next;
+            free(prev);
+        }
+        free(graph[i]);
+    }
+
+    free_result(resultVertex);
+    free(resultVertex);
+
     return 0;
 }

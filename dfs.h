@@ -60,4 +60,6 @@ ResultVertex* dfs(Vertex *graph[], int size, int max_length, Vertex *start, Vert
 
 ResultVertex* dfs_rec(Vertex *vertex, int* count, Vertex *dest);
 
+void free_result(ResultVertex* resultVertex);
+
 #endif //SEM_DFS_H
