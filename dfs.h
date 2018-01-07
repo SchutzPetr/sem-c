@@ -54,7 +54,7 @@ ResultNodeList* new_result_node_list(ResultNode* node);
 
 void connect(Vertex* a, Vertex* b, Date *value);
 
-ResultVertex* do_dfs(Vertex *vertex, int* count, Vertex *dest);
+ResultVertex* do_dfs(Vertex *vertex, int* count, int length, Vertex *dest);
 
 ResultVertex* dfs(Vertex *graph[], int size, Vertex *start, Vertex *dest);
 

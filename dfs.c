@@ -78,16 +78,20 @@ ResultNodeList* new_result_node_list(ResultNode* node){
     return resultNodeList;
 }
 
-ResultVertex* do_dfs(Vertex *vertex, int* count, Vertex *dest) {
+
+ResultVertex* do_dfs(Vertex *vertex, int* count, int length, Vertex *dest) {
     Node* p = vertex->list;
     if(vertex == dest){
         return new_result_vertex(vertex);
+    }
+    if(length == 3){
+        return NULL;
     }
     ResultVertex *a = NULL;
     vertex->mark = ++(*count);
     while (p != 0) {
         if (!p->vertex->mark) {
-            ResultVertex* b = do_dfs (p->vertex, count, dest);
+            ResultVertex* b = do_dfs (p->vertex, count, length+1, dest);
             if(b){
                 if(!a){
                     a = new_result_vertex(vertex);
@@ -97,6 +101,7 @@ ResultVertex* do_dfs(Vertex *vertex, int* count, Vertex *dest) {
         }
         p = p->next;
     }
+    vertex->mark = 0;
     return a;
 }
 
@@ -106,7 +111,7 @@ ResultVertex* dfs(Vertex *graph[], int size, Vertex *start, Vertex *dest) {
     for (i = 0; i < size; i ++) {
         graph[i]->mark = 0;
     }
-    ResultVertex* resultVertex = do_dfs(start, &count, dest);
+    ResultVertex* resultVertex = do_dfs(start, &count, 0, dest);
     return resultVertex;
 }
 
