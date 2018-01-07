@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <io.h>
+#include <unistd.h>
 #include "vector.h"
 #include "record.h"
 #include "dfs.h"
@@ -145,6 +145,7 @@ int main(int argc, char *argv[]) {
     for (i = 0; i < copy_vector.size; i++) {
         graph[i] = new_vertex(copy_vector.data[i]);
     }
+
     vector_free(&copy_vector);
 
     int vertex_size = i - 1;
