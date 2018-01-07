@@ -114,7 +114,3 @@ ResultVertex* dfs(Vertex *graph[], int size, int max_length, Vertex *start, Vert
     ResultVertex* resultVertex = do_dfs(start, &count, 0, max_length, dest);
     return resultVertex;
 }
-
-void dfs_free(Vertex *graph[]){
-
-}
