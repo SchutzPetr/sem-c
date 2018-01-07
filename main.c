@@ -80,7 +80,7 @@ void print_result(ResultVertex *resultVertex) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 4) {
+    if (argc != 5) {
         printf("Chybný počet argumentů. Zadejte dfs.exe <soubor-grafu> <id1> <id2> <maxD>");
         return 0;
     }
@@ -103,6 +103,13 @@ int main(int argc, char *argv[]) {
 
     if (id2 == 0) {
         printf("ID2 musí být celé číslo!");
+        return 0;
+    }
+
+    int max_length = atoi(argv[4]);
+
+    if (max_length == 0) {
+        printf("max_length musí být celé číslo!");
         return 0;
     }
 
@@ -165,7 +172,7 @@ int main(int argc, char *argv[]) {
         free(prev);
     }
 
-    ResultVertex *resultVertex = dfs(graph, vertex_size, binary_search(vertex_size, graph, id1),
+    ResultVertex *resultVertex = dfs(graph, vertex_size, max_length, binary_search(vertex_size, graph, id1),
                                      binary_search(vertex_size, graph, id2));
     print_result(resultVertex);
     return 0;
